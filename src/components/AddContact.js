@@ -1,15 +1,26 @@
+
 import React from "react";
 
 class AddContact extends React.Component {
   state = {
     name: "",
-    email: "",
+    email: ""
+  };
+
+  // Regular expression for email format validation
+  validateEmail = (email) => {
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return emailRegex.test(email);
   };
 
   add = (e) => {
     e.preventDefault();
     if (this.state.name === "" || this.state.email === "") {
-      alert("ALl the fields are mandatory!");
+      alert("All the fields are mandatory!");
+      return;
+    }
+    if (!this.validateEmail(this.state.email)) {
+      alert("Invalid email format!");
       return;
     }
     this.props.addContactHandler(this.state);
@@ -17,6 +28,7 @@ class AddContact extends React.Component {
     console.log(this.props);
     this.props.history.push("/");
   };
+
   render() {
     return (
       <div className="ui main">
