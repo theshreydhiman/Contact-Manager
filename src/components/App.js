@@ -6,10 +6,13 @@ import Header from "./Header";
 import AddContact from "./AddContact";
 import ContactList from "./ContactList";
 import ContactDetail from "./ContactDetail";
+import Login from './Login';
+import Register from './Register';
 
 function App() {
   const LOCAL_STORAGE_KEY = "contacts";
   const [contacts, setContacts] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const addContactHandler = (contact) => {
     console.log(contact);
@@ -32,6 +35,14 @@ function App() {
   useEffect(() => {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(contacts));
   }, [contacts]);
+
+  const loginHandler = () => {
+    setIsLoggedIn(true);
+  };
+
+  const logoutHandler = () => {
+    setIsLoggedIn(false);
+  };
 
   return (
     <div className="ui container">
@@ -57,6 +68,9 @@ function App() {
           />
 
           <Route path="/contact/:id" component={ContactDetail} />
+          <Route path="/login" component={Login} />
+          <Route path="/register" component={Register} />
+          <Route path="/logout" render={(props) => <div onClick={logoutHandler}>Logout</div>} />
         </Switch>
       </BrowserRouter>
     </div>
