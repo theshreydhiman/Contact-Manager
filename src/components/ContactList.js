@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import ContactCard from "./ContactCard";
 
 const ContactList = (props) => {
-  console.log(props);
 
   const deleteContactHandler = (id) => {
     props.getContactId(id);

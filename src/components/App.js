@@ -1,18 +1,22 @@
-import React, { useState, useEffect } from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
-import { uuid } from "uuidv4";
-import "./App.css";
-import Header from "./Header";
-import AddContact from "./AddContact";
-import ContactList from "./ContactList";
-import ContactDetail from "./ContactDetail";
 
-function App() {
-  const LOCAL_STORAGE_KEY = "contacts";
-  const [contacts, setContacts] = useState([]);
+import React, { useState, useEffect } from "react"; 
+import { BrowserRouter, Switch, Route } from "react-router-dom"; 
+import { uuid } from "uuidv4"; 
+import "./App.css"; 
+import Header from "./Header"; 
+import AddContact from "./AddContact"; 
+import ContactList from "./ContactList"; 
+import ContactDetail from "./ContactDetail"; 
+
+function App() { 
+  const LOCAL_STORAGE_KEY = "contacts"; 
+  // Use lazy initialization for useState to prevent data loss
+  const [contacts, setContacts] = useState(() => {
+    const stored = localStorage.getItem(LOCAL_STORAGE_KEY);
+    return stored ? JSON.parse(stored) : [];
+  });
 
   const addContactHandler = (contact) => {
-    console.log(contact);
     setContacts([...contacts, { id: uuid(), ...contact }]);
   };
 
