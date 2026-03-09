@@ -1,12 +1,20 @@
+
 import React from "react";
-import { Link } from "react-router-dom";
-import user from "../images/user.png";
 
 const ContactCard = (props) => {
   const { id, name, email } = props.contact;
+
+  const handleDelete = (event) => {
+    // Check if the event is a keyboard event
+    if (event.type === 'keydown' && event.key !== 'Enter' && event.key !== ' ') {
+      return;
+    }
+    props.clickHander(id);
+  };
+
   return (
     <div className="item">
-      <img className="ui avatar image" src={user} alt="user" />
+      <img className="ui avatar image" src="user.png" alt="user" />
       <div className="content">
         <Link
           to={{ pathname: `/contact/${id}`, state: { contact: props.contact } }}
@@ -15,11 +23,14 @@ const ContactCard = (props) => {
           <div>{email}</div>
         </Link>
       </div>
-      <i
+      <button
         className="trash alternate outline icon"
         style={{ color: "red", marginTop: "7px" }}
-        onClick={() => props.clickHander(id)}
-      ></i>
+        onClick={handleDelete}
+        aria-label="Delete contact"
+        tabIndex={0}
+        onKeyDown={handleDelete}
+      ></button>
     </div>
   );
 };
