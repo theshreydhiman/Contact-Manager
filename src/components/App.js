@@ -15,7 +15,6 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const addContactHandler = (contact) => {
-    console.log(contact);
     setContacts([...contacts, { id: uuid(), ...contact }]);
   };
 
@@ -28,8 +27,8 @@ function App() {
   };
 
   useEffect(() => {
-    const retriveContacts = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
-    if (retriveContacts) setContacts(retriveContacts);
+    const retrieveContacts = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
+    if (retrieveContacts) setContacts(retrieveContacts);
   }, []);
 
   useEffect(() => {
