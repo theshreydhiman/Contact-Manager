@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { uuid } from "uuidv4";
@@ -6,6 +7,7 @@ import Header from "./Header";
 import AddContact from "./AddContact";
 import ContactList from "./ContactList";
 import ContactDetail from "./ContactDetail";
+import NotFound from './NotFound'; // Import the new NotFound component
 
 function App() {
   const LOCAL_STORAGE_KEY = "contacts";
@@ -57,6 +59,7 @@ function App() {
           />
 
           <Route path="/contact/:id" component={ContactDetail} />
+          <Route component={NotFound} /> // Add a catch-all route for unmatched URLs
         </Switch>
       </BrowserRouter>
     </div>
