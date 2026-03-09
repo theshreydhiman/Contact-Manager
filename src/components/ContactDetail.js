@@ -1,29 +1,19 @@
+import React from "react";
+import { Link, useParams } from "react-router-dom";
+import user from "../images/user.jpg";
 
-import React from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import user from '../images/user.jpg';
-
-const ContactDetail = (props) => {
-  const history = useHistory();
-  const contact = props.location.state && props.location.state.contact;
-
-  // If contact is not found, redirect to contact list
-  if (!contact) {
-    history.push('/');
-    return null;
-  }
-
-  const { name, email } = contact;
-
+const ContactDetail = () => {
+  const { id } = useParams();
+  const contact = JSON.parse(localStorage.getItem('contacts')).find((contact) => contact.id === id);
   return (
     <div className='main'>
       <div className='ui card centered'>
         <div className='image'>
           <img src={user} alt='user' />
         </div>
-        <div className='content'>
-          <div className='header'>{name}</div>
-          <div className='description'>{email}</div>
+        <div className="content">
+          <div className="header">{contact.name}</div>
+          <div className="description">{contact.email}</div>
         </div>
       </div>
       <div className='center-div'>
