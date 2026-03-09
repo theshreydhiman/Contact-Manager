@@ -1,24 +1,25 @@
 
-import React, { useState, useEffect } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { v4 as uuidv4 } from "uuid";
-import "./App.css";
-import Header from "./Header";
-import AddContact from "./AddContact";
-import ContactList from "./ContactList";
-import ContactDetail from "./ContactDetail";
+import React, { useState, useEffect } from "react"; 
+import { BrowserRouter, Routes, Route } from "react-router-dom"; 
+import { v4 as uuidv4 } from "uuid"; 
+import "./App.css"; 
+import Header from "./Header"; 
+import AddContact from "./AddContact"; 
+import ContactList from "./ContactList"; 
+import ContactDetail from "./ContactDetail"; 
 import NotFound from './NotFound'; // Import the new NotFound component
-import Login from './Login';
+import Login from './Login'; 
 import Register from './Register';
 
 function App() {
-  const LOCAL_STORAGE_KEY = "contacts";
-  const [contacts, setContacts] = useState([]);
+  const LOCAL_STORAGE_KEY = "contacts"; 
+  const [contacts, setContacts] = useState([]); 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  // Update addContactHandler to use functional state update
   const addContactHandler = (contact) => {
     console.log(contact);
-    setContacts([...contacts, { id: uuidv4(), ...contact }]);
+    setContacts(prevContacts => [...prevContacts, { id: uuidv4(), ...contact }]);
   };
 
   const removeContactHandler = (id) => {
@@ -52,11 +53,11 @@ function App() {
         <Header />
         <Routes>
           <Route
-            path="/"
+            path="/" 
             element={<ContactList contacts={contacts} getContactId={removeContactHandler} />}
           />
           <Route
-            path="/add"
+            path="/add" 
             element={<AddContact addContactHandler={addContactHandler} />}
           />
 
