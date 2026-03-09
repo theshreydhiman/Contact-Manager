@@ -6,7 +6,7 @@ import ContactCard from "./ContactCard";
 const ContactList = (props) => {
 
   const deleteContactHandler = (id) => {
-    props.getContactId(id);
+    props.onDeleteContact(id);
   };
 
   const renderContactList = props.contacts.map((contact) => {
